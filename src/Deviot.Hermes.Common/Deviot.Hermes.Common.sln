@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Common", "Deviot.Hermes.Common.csproj", "{B3209C09-73B5-4EA6-8BE0-8DA9CA15A514}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Common.BaseClientHttp", "..\Deviot.Hermes.Common.BaseClientHttp\Deviot.Hermes.Common.BaseClientHttp.csproj", "{E80A5ED0-DC2F-4DE3-9E13-A169EDB582A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Common.BaseController", "..\Deviot.Hermes.Common.BaseController\Deviot.Hermes.Common.BaseController.csproj", "{9DE384DC-5093-4CBD-88B9-8DAB1D4D96FC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Common.BaseService", "..\Deviot.Hermes.Common.BaseService\Deviot.Hermes.Common.BaseService.csproj", "{AAD7542C-E0E6-4960-B661-7647FFE109AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3209C09-73B5-4EA6-8BE0-8DA9CA15A514}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3209C09-73B5-4EA6-8BE0-8DA9CA15A514}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3209C09-73B5-4EA6-8BE0-8DA9CA15A514}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3209C09-73B5-4EA6-8BE0-8DA9CA15A514}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E80A5ED0-DC2F-4DE3-9E13-A169EDB582A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E80A5ED0-DC2F-4DE3-9E13-A169EDB582A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E80A5ED0-DC2F-4DE3-9E13-A169EDB582A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E80A5ED0-DC2F-4DE3-9E13-A169EDB582A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DE384DC-5093-4CBD-88B9-8DAB1D4D96FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DE384DC-5093-4CBD-88B9-8DAB1D4D96FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DE384DC-5093-4CBD-88B9-8DAB1D4D96FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DE384DC-5093-4CBD-88B9-8DAB1D4D96FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAD7542C-E0E6-4960-B661-7647FFE109AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAD7542C-E0E6-4960-B661-7647FFE109AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAD7542C-E0E6-4960-B661-7647FFE109AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAD7542C-E0E6-4960-B661-7647FFE109AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {98862D19-83AF-4D8C-A659-DECEE30EEF8C}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Common", "Deviot.Hermes.Modbus.Common\Deviot.Hermes.Modbus.Common.csproj", "{72C75FA4-4D68-4615-A2BB-FA4480C1D3B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Core", "Deviot.Hermes.Modbus.Settings.Core\Deviot.Hermes.Modbus.Core.csproj", "{09EC3633-9BF3-413B-B2E0-A66516DEB5EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Data", "Deviot.Hermes.Modbus.Settings.Data\Deviot.Hermes.Modbus.Data.csproj", "{6BF9911B-5FCF-44DF-BD4E-A2028A98EF77}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Api", "Deviot.Hermes.Modbus.Settings.Api\Deviot.Hermes.Modbus.Api.csproj", "{3182D0A7-3EFE-4990-B6B4-F0BAC450D0B8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Driver", "Deviot.Hermes.Modbus.Driver\Deviot.Hermes.Modbus.Driver.csproj", "{8CE13B44-37E9-4CD0-B9C6-D64DBC56B6C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{BF7811B5-19F5-4C7D-9D52-C3B9AE622BE2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Common", "Deviot.Hermes.Common\Deviot.Hermes.Common.csproj", "{025B5C33-325E-487F-8AB7-0C11E48DEA8A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Common.BaseClientHttp", "Deviot.Hermes.Common.BaseClientHttp\Deviot.Hermes.Common.BaseClientHttp.csproj", "{99ADBCC0-9783-4AFC-BC6C-E0150B1166CE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Common.BaseController", "Deviot.Hermes.Common.BaseController\Deviot.Hermes.Common.BaseController.csproj", "{6084E8FB-E42C-47B0-9F58-9FF6AF2FA681}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Common.BaseService", "Deviot.Hermes.Common.BaseService\Deviot.Hermes.Common.BaseService.csproj", "{1E368EAF-7BDA-4814-8230-8BAFB9527BCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72C75FA4-4D68-4615-A2BB-FA4480C1D3B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72C75FA4-4D68-4615-A2BB-FA4480C1D3B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72C75FA4-4D68-4615-A2BB-FA4480C1D3B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72C75FA4-4D68-4615-A2BB-FA4480C1D3B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09EC3633-9BF3-413B-B2E0-A66516DEB5EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09EC3633-9BF3-413B-B2E0-A66516DEB5EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09EC3633-9BF3-413B-B2E0-A66516DEB5EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09EC3633-9BF3-413B-B2E0-A66516DEB5EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BF9911B-5FCF-44DF-BD4E-A2028A98EF77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BF9911B-5FCF-44DF-BD4E-A2028A98EF77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BF9911B-5FCF-44DF-BD4E-A2028A98EF77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BF9911B-5FCF-44DF-BD4E-A2028A98EF77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3182D0A7-3EFE-4990-B6B4-F0BAC450D0B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3182D0A7-3EFE-4990-B6B4-F0BAC450D0B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3182D0A7-3EFE-4990-B6B4-F0BAC450D0B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3182D0A7-3EFE-4990-B6B4-F0BAC450D0B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CE13B44-37E9-4CD0-B9C6-D64DBC56B6C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CE13B44-37E9-4CD0-B9C6-D64DBC56B6C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CE13B44-37E9-4CD0-B9C6-D64DBC56B6C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CE13B44-37E9-4CD0-B9C6-D64DBC56B6C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{025B5C33-325E-487F-8AB7-0C11E48DEA8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{025B5C33-325E-487F-8AB7-0C11E48DEA8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{025B5C33-325E-487F-8AB7-0C11E48DEA8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{025B5C33-325E-487F-8AB7-0C11E48DEA8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99ADBCC0-9783-4AFC-BC6C-E0150B1166CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99ADBCC0-9783-4AFC-BC6C-E0150B1166CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99ADBCC0-9783-4AFC-BC6C-E0150B1166CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99ADBCC0-9783-4AFC-BC6C-E0150B1166CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6084E8FB-E42C-47B0-9F58-9FF6AF2FA681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6084E8FB-E42C-47B0-9F58-9FF6AF2FA681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6084E8FB-E42C-47B0-9F58-9FF6AF2FA681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6084E8FB-E42C-47B0-9F58-9FF6AF2FA681}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E368EAF-7BDA-4814-8230-8BAFB9527BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E368EAF-7BDA-4814-8230-8BAFB9527BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E368EAF-7BDA-4814-8230-8BAFB9527BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E368EAF-7BDA-4814-8230-8BAFB9527BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{025B5C33-325E-487F-8AB7-0C11E48DEA8A} = {BF7811B5-19F5-4C7D-9D52-C3B9AE622BE2}
+		{99ADBCC0-9783-4AFC-BC6C-E0150B1166CE} = {BF7811B5-19F5-4C7D-9D52-C3B9AE622BE2}
+		{6084E8FB-E42C-47B0-9F58-9FF6AF2FA681} = {BF7811B5-19F5-4C7D-9D52-C3B9AE622BE2}
+		{1E368EAF-7BDA-4814-8230-8BAFB9527BCF} = {BF7811B5-19F5-4C7D-9D52-C3B9AE622BE2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B9C0515B-E7BE-437E-9F4A-B321CB6F8BB8}
+	EndGlobalSection
+EndGlobal
