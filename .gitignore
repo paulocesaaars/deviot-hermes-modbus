@@ -340,3 +340,5 @@ ASALocalRun/
 healthchecksdb
 /src/Deviot.Hermes.Modbus.Settings.Api/Logs
 /src/Deviot.Hermes.Modbus.Settings.Api/Settings
+/src/Deviot.Hermes.Modbus.Service.Api/Logs
+/src/Deviot.Hermes.Modbus.Service.Api/Settings

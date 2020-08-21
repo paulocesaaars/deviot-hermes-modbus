@@ -3,17 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Common", "Deviot.Hermes.Modbus.Common\Deviot.Hermes.Modbus.Common.csproj", "{72C75FA4-4D68-4615-A2BB-FA4480C1D3B9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Core", "Deviot.Hermes.Modbus.Settings.Core\Deviot.Hermes.Modbus.Core.csproj", "{09EC3633-9BF3-413B-B2E0-A66516DEB5EE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Data", "Deviot.Hermes.Modbus.Settings.Data\Deviot.Hermes.Modbus.Data.csproj", "{6BF9911B-5FCF-44DF-BD4E-A2028A98EF77}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Api", "Deviot.Hermes.Modbus.Settings.Api\Deviot.Hermes.Modbus.Api.csproj", "{3182D0A7-3EFE-4990-B6B4-F0BAC450D0B8}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Driver", "Deviot.Hermes.Modbus.Driver\Deviot.Hermes.Modbus.Driver.csproj", "{8CE13B44-37E9-4CD0-B9C6-D64DBC56B6C9}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{BF7811B5-19F5-4C7D-9D52-C3B9AE622BE2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Common", "0 - Common", "{BF7811B5-19F5-4C7D-9D52-C3B9AE622BE2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Common", "Deviot.Hermes.Common\Deviot.Hermes.Common.csproj", "{025B5C33-325E-487F-8AB7-0C11E48DEA8A}"
 EndProject
@@ -23,32 +13,38 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Common.BaseCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Common.BaseService", "Deviot.Hermes.Common.BaseService\Deviot.Hermes.Common.BaseService.csproj", "{1E368EAF-7BDA-4814-8230-8BAFB9527BCF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{45EBF807-0405-4E08-8240-406FEF2EF9D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Service", "2 - Service", "{ADF5F55B-57CB-4EF7-9A8B-38D984F46FB5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Application", "3 - Application", "{88BC4534-D091-447B-8752-9FD539B4AD48}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Domain", "4 - Domain", "{65F9E120-9AE6-4522-9409-F964E83EBDC7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Infra", "5 - Infra", "{57024DD6-30E1-4852-9326-9EBBC269131A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.1 - Data", "5.1 - Data", "{6A9953C7-4E5E-48D4-AD01-B6E299B33B4D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.2 - CrossCutting", "5.2 - CrossCutting", "{46677A64-0E84-4BBA-BC5D-744D551DB9BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Domain", "Deviot.Hermes.Modbus.Domain\Deviot.Hermes.Modbus.Domain.csproj", "{2B1193E2-3F85-4F5E-9B81-B1260E963F2B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Application", "Deviot.Hermes.Modbus.Application\Deviot.Hermes.Modbus.Application.csproj", "{76C67A37-6174-4B68-8BE6-928F2CC37813}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Infra.Data", "Deviot.Hermes.Modbus.Infra.Data\Deviot.Hermes.Modbus.Infra.Data.csproj", "{CF6D0C22-7351-4AD4-A704-BC203D7E156A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Service.Api", "Deviot.Hermes.Modbus.Service.Api\Deviot.Hermes.Modbus.Service.Api.csproj", "{EFCED2EE-D03C-4846-ABAA-E56A3D042B0B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Infra.CrossCutting.IoC", "Deviot.Hermes.Modbus.Infra.CrossCutting.IoC\Deviot.Hermes.Modbus.Infra.CrossCutting.IoC.csproj", "{0962B96C-704D-4CFE-B77F-2F30F7D7B80B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Infra.CrossCutting.Driver", "Deviot.Hermes.Modbus.Infra.CrossCutting.Driver\Deviot.Hermes.Modbus.Infra.CrossCutting.Driver.csproj", "{17981FAF-2637-4374-8AD8-6FF60678C5A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{72C75FA4-4D68-4615-A2BB-FA4480C1D3B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72C75FA4-4D68-4615-A2BB-FA4480C1D3B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72C75FA4-4D68-4615-A2BB-FA4480C1D3B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72C75FA4-4D68-4615-A2BB-FA4480C1D3B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{09EC3633-9BF3-413B-B2E0-A66516DEB5EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{09EC3633-9BF3-413B-B2E0-A66516DEB5EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{09EC3633-9BF3-413B-B2E0-A66516DEB5EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{09EC3633-9BF3-413B-B2E0-A66516DEB5EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6BF9911B-5FCF-44DF-BD4E-A2028A98EF77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BF9911B-5FCF-44DF-BD4E-A2028A98EF77}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BF9911B-5FCF-44DF-BD4E-A2028A98EF77}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BF9911B-5FCF-44DF-BD4E-A2028A98EF77}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3182D0A7-3EFE-4990-B6B4-F0BAC450D0B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3182D0A7-3EFE-4990-B6B4-F0BAC450D0B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3182D0A7-3EFE-4990-B6B4-F0BAC450D0B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3182D0A7-3EFE-4990-B6B4-F0BAC450D0B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CE13B44-37E9-4CD0-B9C6-D64DBC56B6C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CE13B44-37E9-4CD0-B9C6-D64DBC56B6C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CE13B44-37E9-4CD0-B9C6-D64DBC56B6C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CE13B44-37E9-4CD0-B9C6-D64DBC56B6C9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{025B5C33-325E-487F-8AB7-0C11E48DEA8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{025B5C33-325E-487F-8AB7-0C11E48DEA8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{025B5C33-325E-487F-8AB7-0C11E48DEA8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,6 +61,30 @@ Global
 		{1E368EAF-7BDA-4814-8230-8BAFB9527BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E368EAF-7BDA-4814-8230-8BAFB9527BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E368EAF-7BDA-4814-8230-8BAFB9527BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B1193E2-3F85-4F5E-9B81-B1260E963F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B1193E2-3F85-4F5E-9B81-B1260E963F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B1193E2-3F85-4F5E-9B81-B1260E963F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B1193E2-3F85-4F5E-9B81-B1260E963F2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76C67A37-6174-4B68-8BE6-928F2CC37813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76C67A37-6174-4B68-8BE6-928F2CC37813}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76C67A37-6174-4B68-8BE6-928F2CC37813}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76C67A37-6174-4B68-8BE6-928F2CC37813}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF6D0C22-7351-4AD4-A704-BC203D7E156A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF6D0C22-7351-4AD4-A704-BC203D7E156A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF6D0C22-7351-4AD4-A704-BC203D7E156A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF6D0C22-7351-4AD4-A704-BC203D7E156A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFCED2EE-D03C-4846-ABAA-E56A3D042B0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFCED2EE-D03C-4846-ABAA-E56A3D042B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFCED2EE-D03C-4846-ABAA-E56A3D042B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFCED2EE-D03C-4846-ABAA-E56A3D042B0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0962B96C-704D-4CFE-B77F-2F30F7D7B80B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0962B96C-704D-4CFE-B77F-2F30F7D7B80B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0962B96C-704D-4CFE-B77F-2F30F7D7B80B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0962B96C-704D-4CFE-B77F-2F30F7D7B80B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17981FAF-2637-4374-8AD8-6FF60678C5A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17981FAF-2637-4374-8AD8-6FF60678C5A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17981FAF-2637-4374-8AD8-6FF60678C5A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17981FAF-2637-4374-8AD8-6FF60678C5A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +94,14 @@ Global
 		{99ADBCC0-9783-4AFC-BC6C-E0150B1166CE} = {BF7811B5-19F5-4C7D-9D52-C3B9AE622BE2}
 		{6084E8FB-E42C-47B0-9F58-9FF6AF2FA681} = {BF7811B5-19F5-4C7D-9D52-C3B9AE622BE2}
 		{1E368EAF-7BDA-4814-8230-8BAFB9527BCF} = {BF7811B5-19F5-4C7D-9D52-C3B9AE622BE2}
+		{6A9953C7-4E5E-48D4-AD01-B6E299B33B4D} = {57024DD6-30E1-4852-9326-9EBBC269131A}
+		{46677A64-0E84-4BBA-BC5D-744D551DB9BA} = {57024DD6-30E1-4852-9326-9EBBC269131A}
+		{2B1193E2-3F85-4F5E-9B81-B1260E963F2B} = {65F9E120-9AE6-4522-9409-F964E83EBDC7}
+		{76C67A37-6174-4B68-8BE6-928F2CC37813} = {88BC4534-D091-447B-8752-9FD539B4AD48}
+		{CF6D0C22-7351-4AD4-A704-BC203D7E156A} = {6A9953C7-4E5E-48D4-AD01-B6E299B33B4D}
+		{EFCED2EE-D03C-4846-ABAA-E56A3D042B0B} = {ADF5F55B-57CB-4EF7-9A8B-38D984F46FB5}
+		{0962B96C-704D-4CFE-B77F-2F30F7D7B80B} = {46677A64-0E84-4BBA-BC5D-744D551DB9BA}
+		{17981FAF-2637-4374-8AD8-6FF60678C5A0} = {46677A64-0E84-4BBA-BC5D-744D551DB9BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B9C0515B-E7BE-437E-9F4A-B321CB6F8BB8}

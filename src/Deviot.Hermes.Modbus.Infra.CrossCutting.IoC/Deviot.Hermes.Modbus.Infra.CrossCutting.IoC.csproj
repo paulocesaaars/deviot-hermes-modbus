@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<PackageReference Include="AutoMapper" Version="10.0.0" />
+	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Deviot.Hermes.Common\Deviot.Hermes.Common.csproj" />
+    <ProjectReference Include="..\Deviot.Hermes.Modbus.Application\Deviot.Hermes.Modbus.Application.csproj" />
+    <ProjectReference Include="..\Deviot.Hermes.Modbus.Domain\Deviot.Hermes.Modbus.Domain.csproj" />
+    <ProjectReference Include="..\Deviot.Hermes.Modbus.Infra.CrossCutting.Driver\Deviot.Hermes.Modbus.Infra.CrossCutting.Driver.csproj" />
+    <ProjectReference Include="..\Deviot.Hermes.Modbus.Infra.Data\Deviot.Hermes.Modbus.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>

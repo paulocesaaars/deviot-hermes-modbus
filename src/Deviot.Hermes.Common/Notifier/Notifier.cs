@@ -22,8 +22,6 @@ namespace Deviot.Hermes.Common
             return _notifications;
         }
 
-
-
         public bool HasNotification()
         {
             return _notifications.Any();

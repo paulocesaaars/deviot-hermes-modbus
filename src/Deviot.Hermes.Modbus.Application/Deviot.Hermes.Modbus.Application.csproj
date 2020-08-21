@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="10.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.7" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Deviot.Hermes.Common.BaseService\Deviot.Hermes.Common.BaseService.csproj" />
+    <ProjectReference Include="..\Deviot.Hermes.Common\Deviot.Hermes.Common.csproj" />
+    <ProjectReference Include="..\Deviot.Hermes.Modbus.Domain\Deviot.Hermes.Modbus.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
