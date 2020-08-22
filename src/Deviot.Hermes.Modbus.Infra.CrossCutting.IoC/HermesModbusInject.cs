@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Deviot.Hermes.Common;
+using Deviot.Hermes.Modbus.Application.Interfaces;
 using Deviot.Hermes.Modbus.Application.Mappings;
 using Deviot.Hermes.Modbus.Application.Services;
 using Deviot.Hermes.Modbus.Domain.Contracts;
@@ -19,17 +20,15 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.IoC
             // Injeções - Deviot Common
             services.AddScoped<INotifier, Notifier>();
 
-            // Injeções  Common
+            // Injeções  - Automapper
             services.AddAutoMapper(typeof(ModelViewsMapping), typeof(DataMapping));
 
-            // Injeções - Core
+            // Injeções - Device
             services.AddScoped<IDeviceService, DeviceService>();
             services.AddScoped<IDeviceSettingsService, DeviceSettingsService>();
             services.AddScoped<IDeviceSettingsRepository, DeviceSettingsRepository>();
-            services.AddSingleton<IDeviceDriverService, DeviceDriverService>();
 
-            services.AddScoped<IBrokerSettingsService, BrokerSettingsService>();
-            services.AddScoped<IBrokerSettingsRepository, BrokerSettingsRepository>();
+            services.AddSingleton<IDeviceDriverService, DeviceDriverService>();
 
             services.AddHostedService<DeviceBackgroundService>();
         }

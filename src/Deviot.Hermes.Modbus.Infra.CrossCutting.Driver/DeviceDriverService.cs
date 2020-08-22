@@ -1,5 +1,4 @@
 ﻿using Deviot.Hermes.Common;
-using Deviot.Hermes.Common.Entities;
 using Deviot.Hermes.Modbus.Domain.Contracts;
 using Deviot.Hermes.Modbus.Domain.Entities;
 using Microsoft.Extensions.Logging;

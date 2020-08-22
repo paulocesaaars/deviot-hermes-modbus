@@ -1,5 +1,4 @@
-﻿using Deviot.Hermes.Common.Entities;
-using Deviot.Hermes.Modbus.Domain.Entities;
+﻿using Deviot.Hermes.Modbus.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 

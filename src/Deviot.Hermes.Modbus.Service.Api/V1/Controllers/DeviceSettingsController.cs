@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using Deviot.Hermes.Common;
+﻿using Deviot.Hermes.Common;
 using Deviot.Hermes.Common.BaseController;
+using Deviot.Hermes.Modbus.Application.Interfaces;
 using Deviot.Hermes.Modbus.Application.ModelViews;
-using Deviot.Hermes.Modbus.Domain.Contracts;
-using Deviot.Hermes.Modbus.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,12 +12,10 @@ namespace Deviot.Hermes.Modbus.Api.V1.Controllers
     [Route("api/v{version:apiVersion}/device-settings")]
     public class DeviceSettingsController : BaseController
     {
-        private readonly IMapper _mapper;
         private readonly IDeviceSettingsService _modbusDeviceService;
 
-        public DeviceSettingsController(INotifier notifier, ILogger<DeviceSettingsController> logger, IMapper mapper, IDeviceSettingsService modbusDeviceService) : base(notifier, logger)
+        public DeviceSettingsController(INotifier notifier, ILogger<DeviceSettingsController> logger, IDeviceSettingsService modbusDeviceService) : base(notifier, logger)
         {
-            _mapper = mapper;
             _modbusDeviceService = modbusDeviceService;
         }
 
@@ -29,7 +25,7 @@ namespace Deviot.Hermes.Modbus.Api.V1.Controllers
             try
             {
                 var device = await _modbusDeviceService.GetAsync();
-                return CustomResponse(_mapper.Map<ModbusDeviceModelView>(device));
+                return CustomResponse(await _modbusDeviceService.GetAsync());
             }
             catch (Exception exception)
             {
@@ -65,7 +61,7 @@ namespace Deviot.Hermes.Modbus.Api.V1.Controllers
                 if (!ModelState.IsValid)
                     return ReturnActionResultForInvalidModelState(ModelState);
 
-                await _modbusDeviceService.UpdateAsync(_mapper.Map<ModbusDevice>(deviceModelView));
+                await _modbusDeviceService.UpdateAsync(deviceModelView);
                 return CustomResponse();
             }
             catch (Exception exception)

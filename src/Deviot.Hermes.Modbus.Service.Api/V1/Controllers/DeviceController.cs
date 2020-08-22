@@ -1,8 +1,7 @@
-﻿using AutoMapper;
-using Deviot.Hermes.Common;
+﻿using Deviot.Hermes.Common;
 using Deviot.Hermes.Common.BaseController;
-using Deviot.Hermes.Common.Entities;
-using Deviot.Hermes.Modbus.Domain.Contracts;
+using Deviot.Hermes.Modbus.Application.Interfaces;
+using Deviot.Hermes.Modbus.Application.ModelViews;
 using Deviot.Hermes.Modbus.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,12 +14,10 @@ namespace Deviot.Hermes.Modbus.Api.V1.Controllers
     [Route("api/v{version:apiVersion}/device")]
     public class DeviceController : BaseController
     {
-        private readonly IMapper _mapper;
         private readonly IDeviceService _deviceService;
 
-        public DeviceController(INotifier notifier, ILogger<DeviceSettingsController> logger, IMapper mapper, IDeviceService deviceService) : base(notifier, logger)
+        public DeviceController(INotifier notifier, ILogger<DeviceSettingsController> logger, IDeviceService deviceService) : base(notifier, logger)
         {
-            _mapper = mapper;
             _deviceService = deviceService;
         }
 
@@ -40,12 +37,12 @@ namespace Deviot.Hermes.Modbus.Api.V1.Controllers
 
         [HttpGet]
         [Route("data")]
-        public ActionResult<IEnumerable<DeviceData>> GetDataForInformations([FromQuery] string[] ids)
+        public ActionResult<IEnumerable<DeviceDataModelView>> GetDataForInformations([FromQuery] string[] id)
         {
             try
             {
-                if (ids.Length > 0)
-                    return CustomResponse(_deviceService.GetData(ids));
+                if (id.Length > 0)
+                    return CustomResponse(_deviceService.GetData(id));
                 else
                     return CustomResponse(_deviceService.GetData());
 

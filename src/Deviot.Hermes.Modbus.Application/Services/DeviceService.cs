@@ -1,7 +1,8 @@
-﻿using Deviot.Hermes.Common;
+﻿using AutoMapper;
+using Deviot.Hermes.Common;
 using Deviot.Hermes.Common.BaseService;
-using Deviot.Hermes.Common.Entities;
-using Deviot.Hermes.Modbus.Domain.Entities;
+using Deviot.Hermes.Modbus.Application.Interfaces;
+using Deviot.Hermes.Modbus.Application.ModelViews;
 using Deviot.Hermes.Modbus.Domain.Contracts;
 using System;
 using System.Collections.Generic;
@@ -11,28 +12,30 @@ namespace Deviot.Hermes.Modbus.Application.Services
 {
     public class DeviceService : BaseService, IDeviceService
     {
+        private readonly IMapper _mapper;
         private readonly IDeviceSettingsRepository _deviceSettingsRepository;
         private readonly IDeviceDriverService _deviceDriverService;
 
-        public DeviceService(INotifier notifier, IDeviceSettingsRepository deviceSettingsRepository, IDeviceDriverService deviceDriverService) : base(notifier)
+        public DeviceService(INotifier notifier, IMapper mapper, IDeviceSettingsRepository deviceSettingsRepository, IDeviceDriverService deviceDriverService) : base(notifier)
         {
+            _mapper = mapper;
             _deviceSettingsRepository = deviceSettingsRepository;
             _deviceDriverService = deviceDriverService;
         }
 
-        public IEnumerable<DeviceData> GetData()
+        public IEnumerable<DeviceDataModelView> GetData()
         {
-            return _deviceDriverService.GetData();
+            return _mapper.Map<IEnumerable<DeviceDataModelView>>(_deviceDriverService.GetData());
         }
 
-        public IEnumerable<DeviceData> GetData(IEnumerable<string> idInformations)
+        public IEnumerable<DeviceDataModelView> GetData(IEnumerable<string> idInformations)
         {
-            return _deviceDriverService.GetData(idInformations);
+            return _mapper.Map<IEnumerable<DeviceDataModelView>>(_deviceDriverService.GetData(idInformations));
         }
 
-        public ModbusStatusDevice GetStatusDevice()
+        public ModbusStatusDeviceModelView GetStatusDevice()
         {
-            return _deviceDriverService.GetStatusDevice();
+            return _mapper.Map<ModbusStatusDeviceModelView>(_deviceDriverService.GetStatusDevice());
         }
 
         public void SendData(string idInformation, string data)
@@ -60,11 +63,6 @@ namespace Deviot.Hermes.Modbus.Application.Services
         public void Stop()
         {
             _deviceDriverService.Stop();
-        }
-
-        public void UpdateDevice(ModbusDevice modbusDevice)
-        {
-            _deviceDriverService.UpdateDevice(modbusDevice);
         }
     }
 }

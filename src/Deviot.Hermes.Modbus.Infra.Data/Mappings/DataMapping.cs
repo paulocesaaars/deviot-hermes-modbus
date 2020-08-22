@@ -10,8 +10,6 @@ namespace Deviot.Hermes.Modbus.Application.Mappings
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                CreateMap<BrokerDeviceJson, BrokerDevice>().ReverseMap();
-
                 CreateMap<ModbusDeviceJson, ModbusDevice>().ReverseMap();
 
                 CreateMap<ModbusInformationJson, ModbusInformation>()

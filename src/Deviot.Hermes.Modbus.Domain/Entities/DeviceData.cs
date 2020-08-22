@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Deviot.Hermes.Common.Entities
+namespace Deviot.Hermes.Modbus.Domain.Entities
 {
     public class DeviceData
     {

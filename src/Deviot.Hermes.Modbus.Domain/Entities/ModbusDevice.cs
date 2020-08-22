@@ -34,6 +34,7 @@ namespace Deviot.Hermes.Modbus.Domain.Entities
             Scan = scan;
             Timeout = timeout;
             MaximumNumberOfReadingAttempts = maximumNumberOfReadingAttempts;
+            ModbusInformations = new List<ModbusInformation>();
         }
     }
 }
