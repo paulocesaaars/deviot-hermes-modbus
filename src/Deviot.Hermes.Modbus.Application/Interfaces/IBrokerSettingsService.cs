@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 
 namespace Deviot.Hermes.Modbus.Application.Interfaces
 {
-    public interface IDeviceSettingsService
+    public interface IBrokerSettingsService
     {
-        Task<ModbusDeviceViewModel> GetAsync();
+        Task<MosquittoBrokerViewModel> GetAsync();
 
-        Task UpdateAsync(ModbusDeviceViewModel device);
+        Task UpdateAsync(MosquittoBrokerViewModel device);
 
         Task ResetAsync();
     }

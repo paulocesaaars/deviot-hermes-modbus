@@ -9,22 +9,22 @@ using System.Threading.Tasks;
 
 namespace Deviot.Hermes.Modbus.Api.V1.Controllers
 {
-    [Route("api/v{version:apiVersion}/device-settings")]
-    public class DeviceSettingsController : BaseController
+    [Route("api/v{version:apiVersion}/broker")]
+    public class BrokerController : BaseController
     {
-        private readonly IDeviceSettingsService _modbusDeviceService;
+        private readonly IBrokerService _brokerService;
 
-        public DeviceSettingsController(INotifier notifier, ILogger<DeviceSettingsController> logger, IDeviceSettingsService modbusDeviceService) : base(notifier, logger)
+        public BrokerController(INotifier notifier, ILogger<BrokerController> logger, IBrokerService brokerService) : base(notifier, logger)
         {
-            _modbusDeviceService = modbusDeviceService;
+            _brokerService = brokerService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<ModbusDeviceViewModel>> GetAsync()
+        public ActionResult<MosquittoBrokerStatusViewModel> Get()
         {
             try
             {
-                return CustomResponse(await _modbusDeviceService.GetAsync());
+                return CustomResponse(_brokerService.GetDeviceStatus());
             }
             catch (Exception exception)
             {
@@ -34,12 +34,12 @@ namespace Deviot.Hermes.Modbus.Api.V1.Controllers
         }
 
         [HttpPost]
-        [Route("reset")]
-        public async Task<ActionResult> PostAsync()
+        [Route("start")]
+        public async Task<ActionResult> PostStartAsync()
         {
             try
             {
-                await _modbusDeviceService.ResetAsync();
+                await _brokerService.Start();
                 return CustomResponse();
             }
             catch (Exception exception)
@@ -49,18 +49,13 @@ namespace Deviot.Hermes.Modbus.Api.V1.Controllers
             }
         }
 
-        [HttpPut]
-        public async Task<ActionResult> PutAsync([FromBody] ModbusDeviceViewModel deviceModelView)
+        [HttpPost]
+        [Route("stop")]
+        public ActionResult PostStop()
         {
             try
             {
-                if (deviceModelView == null)
-                    return ReturnActionResultForInvalidInformation();
-
-                if (!ModelState.IsValid)
-                    return ReturnActionResultForInvalidModelState(ModelState);
-
-                await _modbusDeviceService.UpdateAsync(deviceModelView);
+                _brokerService.Stop();
                 return CustomResponse();
             }
             catch (Exception exception)

@@ -1,4 +1,6 @@
-﻿namespace Deviot.Hermes.Modbus.Domain.Entities
+﻿using Deviot.Hermes.Common;
+
+namespace Deviot.Hermes.Modbus.Domain.Entities
 {
     public abstract class ModbusInformation
     {
@@ -9,6 +11,8 @@
         public string Description { get; protected set; }
 
         public bool Active { get; protected set; }
+
+        public bool EnableWrite { get; protected set; }
 
         public ushort ModbusInformationTypeId { get; protected set; }
 

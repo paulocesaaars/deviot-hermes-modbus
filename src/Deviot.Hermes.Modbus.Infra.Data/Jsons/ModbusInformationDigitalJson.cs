@@ -1,4 +1,5 @@
-﻿using Deviot.Hermes.Modbus.Domain.Entities;
+﻿using Deviot.Hermes.Common;
+using Deviot.Hermes.Modbus.Domain.Entities;
 
 namespace Deviot.Hermes.Modbus.Infra.Data.Jsons
 {

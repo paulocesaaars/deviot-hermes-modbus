@@ -1,5 +1,5 @@
-﻿using Deviot.Hermes.Modbus.Domain.Entities;
-using System.ComponentModel.DataAnnotations;
+﻿using Deviot.Hermes.Common;
+using Deviot.Hermes.Modbus.Domain.Entities;
 using System.Text.Json.Serialization;
 
 namespace Deviot.Hermes.Modbus.Infra.Data.Jsons
@@ -7,16 +7,15 @@ namespace Deviot.Hermes.Modbus.Infra.Data.Jsons
     [JsonConverter(typeof(ModbusInformationJsonSerializer))]
     public abstract class ModbusInformationJson
     {
-        [Required(ErrorMessage = "O id da informação não foi informado.")]
         public string Id { get; set; }
 
-        [Required(ErrorMessage = "O tópico para o broker não foi informado.")]
         public string Topic { get; set; }
 
-        [Required(ErrorMessage = "A descrição da informação não foi informada.")]
         public string Description { get; set; }
 
         public bool Active { get; set; }
+
+        public bool EnableWrite { get; set; }
 
         public ushort ModbusInformationTypeId { get; set; }
 

@@ -23,19 +23,19 @@ namespace Deviot.Hermes.Modbus.Application.Services
             _deviceDriverService = deviceDriverService;
         }
 
-        public IEnumerable<DeviceDataModelView> GetData()
+        public IEnumerable<DeviceDataViewModel> GetData()
         {
-            return _mapper.Map<IEnumerable<DeviceDataModelView>>(_deviceDriverService.GetData());
+            return _mapper.Map<IEnumerable<DeviceDataViewModel>>(_deviceDriverService.GetData());
         }
 
-        public IEnumerable<DeviceDataModelView> GetData(IEnumerable<string> idInformations)
+        public IEnumerable<DeviceDataViewModel> GetData(IEnumerable<string> idInformations)
         {
-            return _mapper.Map<IEnumerable<DeviceDataModelView>>(_deviceDriverService.GetData(idInformations));
+            return _mapper.Map<IEnumerable<DeviceDataViewModel>>(_deviceDriverService.GetData(idInformations));
         }
 
-        public ModbusStatusDeviceModelView GetStatusDevice()
+        public ModbusDeviceStatusViewModel GetDeviceStatus()
         {
-            return _mapper.Map<ModbusStatusDeviceModelView>(_deviceDriverService.GetStatusDevice());
+            return _mapper.Map<ModbusDeviceStatusViewModel>(_deviceDriverService.GetDeviceStatus());
         }
 
         public void SendData(string idInformation, string data)

@@ -39,6 +39,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Infra.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Infra.CrossCutting.Driver", "Deviot.Hermes.Modbus.Infra.CrossCutting.Driver\Deviot.Hermes.Modbus.Infra.CrossCutting.Driver.csproj", "{17981FAF-2637-4374-8AD8-6FF60678C5A0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6 - Test", "6 - Test", "{5950B7FD-1DDA-4F1D-95A3-99840A9FDD94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deviot.Hermes.Modbus.Test", "Deviot.Hermes.Modbus.Test\Deviot.Hermes.Modbus.Test.csproj", "{1FCD7995-6B21-432C-9ED6-FEE64620C818}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deviot.Hermes.Mosquitto.Infra.CrossCutting.Driver", "Deviot.Hermes.Mosquitto.Infra.CrossCutting.Driver\Deviot.Hermes.Mosquitto.Infra.CrossCutting.Driver.csproj", "{12B8A892-F9BD-4BE9-8961-2C6B0AFBBD20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +91,14 @@ Global
 		{17981FAF-2637-4374-8AD8-6FF60678C5A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17981FAF-2637-4374-8AD8-6FF60678C5A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17981FAF-2637-4374-8AD8-6FF60678C5A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FCD7995-6B21-432C-9ED6-FEE64620C818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FCD7995-6B21-432C-9ED6-FEE64620C818}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FCD7995-6B21-432C-9ED6-FEE64620C818}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FCD7995-6B21-432C-9ED6-FEE64620C818}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12B8A892-F9BD-4BE9-8961-2C6B0AFBBD20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12B8A892-F9BD-4BE9-8961-2C6B0AFBBD20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12B8A892-F9BD-4BE9-8961-2C6B0AFBBD20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12B8A892-F9BD-4BE9-8961-2C6B0AFBBD20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +116,8 @@ Global
 		{EFCED2EE-D03C-4846-ABAA-E56A3D042B0B} = {ADF5F55B-57CB-4EF7-9A8B-38D984F46FB5}
 		{0962B96C-704D-4CFE-B77F-2F30F7D7B80B} = {46677A64-0E84-4BBA-BC5D-744D551DB9BA}
 		{17981FAF-2637-4374-8AD8-6FF60678C5A0} = {46677A64-0E84-4BBA-BC5D-744D551DB9BA}
+		{1FCD7995-6B21-432C-9ED6-FEE64620C818} = {5950B7FD-1DDA-4F1D-95A3-99840A9FDD94}
+		{12B8A892-F9BD-4BE9-8961-2C6B0AFBBD20} = {46677A64-0E84-4BBA-BC5D-744D551DB9BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B9C0515B-E7BE-437E-9F4A-B321CB6F8BB8}

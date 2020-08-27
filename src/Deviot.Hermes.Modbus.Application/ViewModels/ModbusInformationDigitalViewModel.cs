@@ -1,8 +1,9 @@
-﻿using Deviot.Hermes.Modbus.Domain.Entities;
+﻿using Deviot.Hermes.Common;
+using Deviot.Hermes.Modbus.Domain.Entities;
 
 namespace Deviot.Hermes.Modbus.Application.ModelViews
 {
-    public class ModbusInformationDigitalModelView : ModbusInformationModelView
+    public class ModbusInformationDigitalViewModel : ModbusInformationViewModel
     {
         public override ModbusInformationType ModbusInformationType => ModbusInformationType.ModbusInformationDigital;
 

@@ -22,11 +22,11 @@ namespace Deviot.Hermes.Modbus.Api.V1.Controllers
         }
 
         [HttpGet]
-        public ActionResult<ModbusStatusDevice> Get()
+        public ActionResult<ModbusDeviceStatus> Get()
         {
             try
             {
-                return CustomResponse(_deviceService.GetStatusDevice());
+                return CustomResponse(_deviceService.GetDeviceStatus());
             }
             catch (Exception exception)
             {
@@ -37,7 +37,7 @@ namespace Deviot.Hermes.Modbus.Api.V1.Controllers
 
         [HttpGet]
         [Route("data")]
-        public ActionResult<IEnumerable<DeviceDataModelView>> GetDataForInformations([FromQuery] string[] id)
+        public ActionResult<IEnumerable<DeviceDataViewModel>> GetDataForInformations([FromQuery] string[] id)
         {
             try
             {

@@ -6,6 +6,7 @@ using Deviot.Hermes.Modbus.Application.Services;
 using Deviot.Hermes.Modbus.Domain.Contracts;
 using Deviot.Hermes.Modbus.Infra.CrossCutting.Driver;
 using Deviot.Hermes.Modbus.Infra.Data;
+using Deviot.Hermes.Mosquitto.Infra.CrossCutting.Driver;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -27,10 +28,14 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.IoC
             services.AddScoped<IDeviceService, DeviceService>();
             services.AddScoped<IDeviceSettingsService, DeviceSettingsService>();
             services.AddScoped<IDeviceSettingsRepository, DeviceSettingsRepository>();
+            services.AddScoped<IBrokerService, BrokerService>();
+            services.AddScoped<IBrokerSettingsService, BrokerSettingsService>();
+            services.AddScoped<IBrokerSettingsRepository, BrokerSettingsRepository>();
 
-            services.AddSingleton<IDeviceDriverService, DeviceDriverService>();
+            services.AddSingleton<IDeviceDriverService, ModbusDriverService>();
+            services.AddSingleton<IBrokerDriverService, MosquittoDriverService>();
 
-            services.AddHostedService<DeviceBackgroundService>();
+            services.AddHostedService<HermesBackgroundService>();
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using Deviot.Hermes.Common;
-
-namespace Deviot.Hermes.Modbus.Domain.Entities
+﻿namespace Deviot.Hermes.Common
 {
     public class DeviceDataType : Enumeration
     {

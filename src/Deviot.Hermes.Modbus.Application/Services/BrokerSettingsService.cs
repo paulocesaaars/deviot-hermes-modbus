@@ -12,12 +12,13 @@ using System.Threading.Tasks;
 
 namespace Deviot.Hermes.Modbus.Application.Services
 {
-    public class DeviceSettingsService : BaseService, IDeviceSettingsService
+    public class BrokerSettingsService : BaseService, IBrokerSettingsService
     {
         #region Attributes
         private readonly IMapper _mapper;
         private readonly IDeviceSettingsRepository _deviceSettingsRepository;
-        private readonly IDeviceDriverService _deviceDriverService;
+        private readonly IBrokerSettingsRepository _brokerSettingsRepository;
+        private readonly IBrokerDriverService _brokerDriverService;
         #endregion
 
         #region Properties
@@ -32,25 +33,26 @@ namespace Deviot.Hermes.Modbus.Application.Services
         #region Methods
 
         #region Private
-        private bool Validate(ModbusDevice device)
+        private bool Validate(MosquittoBroker broker)
         {
-            return Validate<ModbusDevice, ModbusDeviceValidation>(device, new ModbusDeviceValidation());
+            return Validate<MosquittoBroker, MosquittoBrokerValidation>(broker, new MosquittoBrokerValidation());
         }
         #endregion
 
         #region Public
-        public DeviceSettingsService(INotifier notifier, IMapper mapper, IDeviceSettingsRepository deviceSettingsRepository, IDeviceDriverService deviceDriverService) : base(notifier)
+        public BrokerSettingsService(INotifier notifier, IMapper mapper, IBrokerSettingsRepository brokerSettingsRepository, IBrokerDriverService brokerDriverService, IDeviceSettingsRepository deviceSettingsRepository) : base(notifier)
         {
             _mapper = mapper;
             _deviceSettingsRepository = deviceSettingsRepository;
-            _deviceDriverService = deviceDriverService;
+            _brokerSettingsRepository = brokerSettingsRepository;
+            _brokerDriverService = brokerDriverService;
         }
 
-        public async Task<ModbusDeviceViewModel> GetAsync()
+        public async Task<MosquittoBrokerViewModel> GetAsync()
         {
             try
             {
-                return _mapper.Map<ModbusDeviceViewModel>(await _deviceSettingsRepository.GetAsync());
+                return _mapper.Map<MosquittoBrokerViewModel>(await _brokerSettingsRepository.GetAsync());
             }
             catch (InvalidDataException exception)
             {
@@ -59,19 +61,20 @@ namespace Deviot.Hermes.Modbus.Application.Services
             }
             catch (Exception exception)
             {
-                throw new Exception("Houve um erro ao buscar os dispositivos.", exception);
+                throw new Exception("Houve um erro ao buscar a configuração do broker Mosquitto.", exception);
             }
         }
 
-        public async Task UpdateAsync(ModbusDeviceViewModel modbusDeviceModelView)
+        public async Task UpdateAsync(MosquittoBrokerViewModel mosquittoBroker)
         {
             try
             {
-                var device = _mapper.Map<ModbusDevice>(modbusDeviceModelView);
-                if (Validate(device))
+                var broker = _mapper.Map<MosquittoBroker>(mosquittoBroker);
+                if (Validate(broker))
                 {
-                    await _deviceSettingsRepository.UpdateAsync(device);
-                    _deviceDriverService.UpdateDevice(device);
+                    await _brokerSettingsRepository.UpdateAsync(broker);
+                    var device = await _deviceSettingsRepository.GetAsync();
+                    _brokerDriverService.UpdateDevice(broker, device);
                 }
             }
             catch (InvalidDataException exception)
@@ -80,7 +83,7 @@ namespace Deviot.Hermes.Modbus.Application.Services
             }
             catch (Exception exception)
             {
-                throw new Exception($"Houve um erro ao atualizar o dispositivo modbus.", exception);
+                throw new Exception($"Houve um erro ao atualizar o broker Mosquitto.", exception);
             }
         }
 
@@ -88,8 +91,9 @@ namespace Deviot.Hermes.Modbus.Application.Services
         {
             try
             {
+                var broker = await _brokerSettingsRepository.ResetAsync();
                 var device = await _deviceSettingsRepository.ResetAsync();
-                _deviceDriverService.UpdateDevice(device);
+                _brokerDriverService.UpdateDevice(broker, device);
             }
             catch (InvalidDataException exception)
             {
@@ -97,7 +101,7 @@ namespace Deviot.Hermes.Modbus.Application.Services
             }
             catch (Exception exception)
             {
-                throw new Exception($"Houve um erro ao resetar as configurações de dispositivo.", exception);
+                throw new Exception($"Houve um erro ao resetar as configurações do broker Mosquitto.", exception);
             }
         }
         #endregion

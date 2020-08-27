@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Deviot.Hermes.Modbus.Infra.Data
 {
-    public class DeviceSettingsRepository : IDeviceSettingsRepository
+    public class BrokerSettingsRepository : IBrokerSettingsRepository
     {
         #region Attributes
         private readonly IMapper _mapper;
@@ -20,11 +20,11 @@ namespace Deviot.Hermes.Modbus.Infra.Data
 
         #region Constants
         private const string PATH_DIRECTORY = @".\Settings\";
-        private const string PATH_JSON = PATH_DIRECTORY + "Device.json";
+        private const string PATH_JSON = PATH_DIRECTORY + "Broker.json";
         #endregion
 
         #region Constructors
-        public DeviceSettingsRepository(IMapper mapper)
+        public BrokerSettingsRepository(IMapper mapper)
         {
             _mapper = mapper;
 
@@ -35,7 +35,7 @@ namespace Deviot.Hermes.Modbus.Infra.Data
 
         #region Methods
         #region Private
-        private async Task<ModbusDevice> ReadFileAsync()
+        private async Task<MosquittoBroker> ReadFileAsync()
         {
             try
             {
@@ -44,8 +44,8 @@ namespace Deviot.Hermes.Modbus.Infra.Data
 
                 using (FileStream stream = File.OpenRead(PATH_JSON))
                 {
-                    var device = await JsonSerializer.DeserializeAsync<ModbusDeviceJson>(stream);
-                    return _mapper.Map<ModbusDevice>(device);
+                    var broker = await JsonSerializer.DeserializeAsync<MosquittoBrokerJson>(stream);
+                    return _mapper.Map<MosquittoBroker>(broker);
                 }
             }
             catch(Exception)
@@ -54,11 +54,11 @@ namespace Deviot.Hermes.Modbus.Infra.Data
             }
         }
 
-        private async Task WriteFileAsync(ModbusDevice device)
+        private async Task WriteFileAsync(MosquittoBroker broker)
         {
             try
             {
-                var devicesViewModel = _mapper.Map<ModbusDeviceJson>(device);
+                var brokerModelView = _mapper.Map<MosquittoBrokerJson>(broker);
 
                 var options = new JsonSerializerOptions
                 {
@@ -67,7 +67,7 @@ namespace Deviot.Hermes.Modbus.Infra.Data
                     Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(System.Text.Unicode.UnicodeRanges.All)
                 };
 
-                var json = JsonSerializer.Serialize(devicesViewModel, options);
+                var json = JsonSerializer.Serialize(brokerModelView, options);
 
                 await File.WriteAllTextAsync(PATH_JSON, json);
             }
@@ -79,22 +79,22 @@ namespace Deviot.Hermes.Modbus.Infra.Data
         #endregion
 
         #region Public
-        public async Task<ModbusDevice> GetAsync()
+        public async Task<MosquittoBroker> GetAsync()
         {
             return await ReadFileAsync();
         }
 
-        public async Task UpdateAsync(ModbusDevice device)
+        public async Task UpdateAsync(MosquittoBroker broker)
         {
-            await WriteFileAsync(device);
+            await WriteFileAsync(broker);
         }
 
-        public async Task<ModbusDevice> ResetAsync()
+        public async Task<MosquittoBroker> ResetAsync()
         {
-            var device = new ModbusDevice("Dispositivo Modbus", false, "127.0.0.1", 502, 1000, 500, 3);
-            await WriteFileAsync(device);
+            var broker = new MosquittoBroker("Broker Mosquitto", false, "127.0.0.1", 502, 1000);
+            await WriteFileAsync(broker);
 
-            return device;
+            return broker;
         }
         #endregion
 

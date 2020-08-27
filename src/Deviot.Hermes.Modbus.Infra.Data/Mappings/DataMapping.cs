@@ -23,6 +23,8 @@ namespace Deviot.Hermes.Modbus.Application.Mappings
                 CreateMap<ModbusInformationAnalogJson, ModbusInformationAnalog>().ReverseMap();
                 CreateMap<ModbusInformationTextJson, ModbusInformationText>().ReverseMap();
                 CreateMap<ModbusInformationUndefinedJson, ModbusInformationUndefined>().ReverseMap();
+
+                CreateMap<MosquittoBrokerJson, MosquittoBroker>().ReverseMap();
             });
         }
     }

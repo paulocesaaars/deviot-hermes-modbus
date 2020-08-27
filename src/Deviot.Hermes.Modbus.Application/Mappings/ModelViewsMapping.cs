@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Deviot.Hermes.Common;
 using Deviot.Hermes.Modbus.Application.ModelViews;
 using Deviot.Hermes.Modbus.Domain.Entities;
 
@@ -10,22 +11,24 @@ namespace Deviot.Hermes.Modbus.Application.Mappings
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                CreateMap<DeviceDataModelView, DeviceData>().ReverseMap();
+                CreateMap<DeviceDataViewModel, DeviceData>().ReverseMap();
 
-                CreateMap<ModbusDeviceModelView, ModbusDevice>().ReverseMap();
-                CreateMap<ModbusStatusDeviceModelView, ModbusStatusDevice>().ReverseMap();                
+                CreateMap<ModbusDeviceViewModel, ModbusDevice>().ReverseMap();
+                CreateMap<ModbusDeviceStatusViewModel, ModbusDeviceStatus>().ReverseMap();                
 
-                CreateMap<ModbusInformationModelView, ModbusInformation>()
-                .Include<ModbusInformationDigitalModelView, ModbusInformationDigital>()
-                .Include<ModbusInformationAnalogModelView, ModbusInformationAnalog>()
-                .Include<ModbusInformationTextModelView, ModbusInformationText>()
-                .Include<ModbusInformationUndefinedModelView, ModbusInformationUndefined>()
+                CreateMap<ModbusInformationViewModel, ModbusInformation>()
+                .Include<ModbusInformationDigitalViewModel, ModbusInformationDigital>()
+                .Include<ModbusInformationAnalogViewModel, ModbusInformationAnalog>()
+                .Include<ModbusInformationTextViewModel, ModbusInformationText>()
+                .Include<ModbusInformationUndefinedViewModel, ModbusInformationUndefined>()
                 .ReverseMap();
 
-                CreateMap<ModbusInformationDigitalModelView, ModbusInformationDigital>().ReverseMap();
-                CreateMap<ModbusInformationAnalogModelView, ModbusInformationAnalog>().ReverseMap();
-                CreateMap<ModbusInformationTextModelView, ModbusInformationText>().ReverseMap();
-                CreateMap<ModbusInformationUndefinedModelView, ModbusInformationUndefined>().ReverseMap();
+                CreateMap<ModbusInformationDigitalViewModel, ModbusInformationDigital>().ReverseMap();
+                CreateMap<ModbusInformationAnalogViewModel, ModbusInformationAnalog>().ReverseMap();
+                CreateMap<ModbusInformationTextViewModel, ModbusInformationText>().ReverseMap();
+                CreateMap<ModbusInformationUndefinedViewModel, ModbusInformationUndefined>().ReverseMap();
+
+                CreateMap<MosquittoBrokerViewModel, MosquittoBroker>().ReverseMap();
             });
         }
     }

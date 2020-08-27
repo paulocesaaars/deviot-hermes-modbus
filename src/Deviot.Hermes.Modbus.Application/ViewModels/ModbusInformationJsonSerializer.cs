@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Deviot.Hermes.Modbus.Application.ModelViews
 {
-    public class ModbusInformationJsonSerializer : JsonConverter<ModbusInformationModelView>
+    public class ModbusInformationJsonSerializer : JsonConverter<ModbusInformationViewModel>
     {
         private ushort CheckDeviceType(Utf8JsonReader reader)
         {
@@ -24,21 +24,21 @@ namespace Deviot.Hermes.Modbus.Application.ModelViews
             return 0;
         }
 
-        public override ModbusInformationModelView Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override ModbusInformationViewModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             var dataTypeId = CheckDeviceType(reader);
 
             if (ModbusInformationType.ModbusInformationDigital.Id == dataTypeId)
-                return JsonSerializer.Deserialize<ModbusInformationDigitalModelView>(ref reader, options);
+                return JsonSerializer.Deserialize<ModbusInformationDigitalViewModel>(ref reader, options);
             else if (ModbusInformationType.ModbusInformationAnalog.Id == dataTypeId)
-                return JsonSerializer.Deserialize<ModbusInformationAnalogModelView>(ref reader, options);
+                return JsonSerializer.Deserialize<ModbusInformationAnalogViewModel>(ref reader, options);
             else if (ModbusInformationType.ModbusInformationText.Id == dataTypeId)
-                return JsonSerializer.Deserialize<ModbusInformationTextModelView>(ref reader, options);
+                return JsonSerializer.Deserialize<ModbusInformationTextViewModel>(ref reader, options);
             else
-                return JsonSerializer.Deserialize<ModbusInformationUndefinedModelView>(ref reader, options);
+                return JsonSerializer.Deserialize<ModbusInformationUndefinedViewModel>(ref reader, options);
         }
 
-        public override void Write(Utf8JsonWriter writer, ModbusInformationModelView value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, ModbusInformationViewModel value, JsonSerializerOptions options)
         {
             JsonSerializer.Serialize(writer, value as object, options);
         }

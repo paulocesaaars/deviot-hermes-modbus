@@ -1,11 +1,12 @@
-﻿using Deviot.Hermes.Modbus.Domain.Entities;
+﻿using Deviot.Hermes.Common;
+using Deviot.Hermes.Modbus.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace Deviot.Hermes.Modbus.Application.ModelViews
 {
     [JsonConverter(typeof(ModbusInformationJsonSerializer))]
-    public abstract class ModbusInformationModelView
+    public abstract class ModbusInformationViewModel
     {
         [Required(ErrorMessage = "O id da informação não foi informado.")]
         public string Id { get; set; }
@@ -17,6 +18,8 @@ namespace Deviot.Hermes.Modbus.Application.ModelViews
         public string Description { get; set; }
 
         public bool Active { get; set; }
+
+        public bool EnableWrite { get; set; }
 
         public ushort ModbusInformationTypeId { get; set; }
 

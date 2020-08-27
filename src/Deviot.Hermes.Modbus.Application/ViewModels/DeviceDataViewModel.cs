@@ -1,9 +1,10 @@
-﻿using Deviot.Hermes.Modbus.Domain.Entities;
+﻿using Deviot.Hermes.Common;
+using Deviot.Hermes.Modbus.Domain.Entities;
 using System;
 
 namespace Deviot.Hermes.Modbus.Application.ModelViews
 {
-    public class DeviceDataModelView
+    public class DeviceDataViewModel
     {
         public string IdInformation { get; set; }
 

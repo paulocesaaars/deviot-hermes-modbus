@@ -15,7 +15,7 @@ using System.Threading;
 
 namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
 {
-    public class DeviceDriverService : IDeviceDriverService
+    public class ModbusDriverService : IDeviceDriverService
     {
         #region Attributes
         private bool _status = false;
@@ -25,7 +25,7 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
         private Dictionary<string, int> _numberOfReadingAttempts;
         private Domain.Entities.ModbusDevice _modbusDevice;
 
-        private readonly ILogger<DeviceDriverService> _logger;
+        private readonly ILogger<ModbusDriverService> _logger;
         #endregion
 
         #region Properties
@@ -35,7 +35,7 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
         #endregion
 
         #region Constructors
-        public DeviceDriverService(ILogger<DeviceDriverService> logger)
+        public ModbusDriverService(ILogger<ModbusDriverService> logger)
         {
             _logger = logger;
             _data = new Dictionary<string, DeviceData>();
@@ -388,9 +388,9 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
         #endregion
 
         #region Public
-        public ModbusStatusDevice GetStatusDevice()
+        public ModbusDeviceStatus GetDeviceStatus()
         {
-            return new ModbusStatusDevice
+            return new ModbusDeviceStatus
                 ( _modbusDevice.Description
                 , _modbusDevice.Active
                 , _modbusDevice.Ip
@@ -416,6 +416,9 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
                 var information = _modbusDevice.ModbusInformations.First(d => d.Id == idInformation);
                 try
                 {
+                    if (!information.EnableWrite)
+                        throw new InvalidOperationException($"Não foi possível escrever, a informação é somente de leitura.");
+
                     if(ValidateData(information, data))
                         SendModbusData(information, data);
                 }
@@ -506,7 +509,11 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
             GC.SuppressFinalize(true);
         }
 
-        
+        private void NotifyDataChange(DeviceData data)
+        {
+            if (ChangedDataEvent != null)
+                ChangedDataEvent(this, data);
+        }
         #endregion
 
         #region Protected
@@ -515,6 +522,7 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
         #endregion
 
         #region Events
+        public event InformationChangedHandler ChangedDataEvent;
         #endregion
     }
 }

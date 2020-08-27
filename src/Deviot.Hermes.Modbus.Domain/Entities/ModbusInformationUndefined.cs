@@ -1,4 +1,6 @@
-﻿namespace Deviot.Hermes.Modbus.Domain.Entities
+﻿using Deviot.Hermes.Common;
+
+namespace Deviot.Hermes.Modbus.Domain.Entities
 {
     public class ModbusInformationUndefined : ModbusInformation
     {

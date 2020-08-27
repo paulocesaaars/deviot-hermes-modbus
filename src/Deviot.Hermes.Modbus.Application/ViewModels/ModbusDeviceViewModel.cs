@@ -2,7 +2,7 @@
 
 namespace Deviot.Hermes.Modbus.Application.ModelViews
 {
-    public class ModbusDeviceModelView
+    public class ModbusDeviceViewModel
     {
         public string Description { get; set; }
 
@@ -18,6 +18,6 @@ namespace Deviot.Hermes.Modbus.Application.ModelViews
 
         public int MaximumNumberOfReadingAttempts { get; set; }
 
-        public IEnumerable<ModbusInformationModelView> ModbusInformations { get; set; }
+        public IEnumerable<ModbusInformationViewModel> ModbusInformations { get; set; }
     }
 }

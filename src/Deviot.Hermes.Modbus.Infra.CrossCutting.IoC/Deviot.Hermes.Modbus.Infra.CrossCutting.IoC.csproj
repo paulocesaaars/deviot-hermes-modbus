@@ -20,6 +20,7 @@
     <ProjectReference Include="..\Deviot.Hermes.Modbus.Domain\Deviot.Hermes.Modbus.Domain.csproj" />
     <ProjectReference Include="..\Deviot.Hermes.Modbus.Infra.CrossCutting.Driver\Deviot.Hermes.Modbus.Infra.CrossCutting.Driver.csproj" />
     <ProjectReference Include="..\Deviot.Hermes.Modbus.Infra.Data\Deviot.Hermes.Modbus.Infra.Data.csproj" />
+    <ProjectReference Include="..\Deviot.Hermes.Mosquitto.Infra.CrossCutting.Driver\Deviot.Hermes.Mosquitto.Infra.CrossCutting.Driver.csproj" />
   </ItemGroup>
 
 </Project>

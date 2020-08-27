@@ -1,14 +1,10 @@
-﻿using System;
-
-namespace Deviot.Hermes.Modbus.Domain.Entities
+﻿namespace Deviot.Hermes.Common
 {
     public class DeviceData
     {
         public string IdInformation { get; private set; }
 
         public string Description { get; private set; }
-
-        public DateTime DateTime { get; private set; }
 
         public DeviceDataType DataType { get; private set; }
 
@@ -20,7 +16,6 @@ namespace Deviot.Hermes.Modbus.Domain.Entities
         {
             IdInformation = idInformation;
             Description = description;
-            DateTime = DateTime.Now;
             DataType = dataType;
             Value = value;
             Quality = true;
@@ -30,7 +25,6 @@ namespace Deviot.Hermes.Modbus.Domain.Entities
         {
             IdInformation = idInformation;
             Description = description;
-            DateTime = DateTime.Now;
             DataType = dataType;
             Value = value;
             Quality = quality;

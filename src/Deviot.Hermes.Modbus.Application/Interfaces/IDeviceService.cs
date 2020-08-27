@@ -10,11 +10,11 @@ namespace Deviot.Hermes.Modbus.Application.Interfaces
 
         void Stop();
 
-        ModbusStatusDeviceModelView GetStatusDevice();
+        ModbusDeviceStatusViewModel GetDeviceStatus();
 
-        IEnumerable<DeviceDataModelView> GetData();
+        IEnumerable<DeviceDataViewModel> GetData();
 
-        IEnumerable<DeviceDataModelView> GetData(IEnumerable<string> idInformations);
+        IEnumerable<DeviceDataViewModel> GetData(IEnumerable<string> idInformations);
 
         void SendData(string idInformation, string data);
     }

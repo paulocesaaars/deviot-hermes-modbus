@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Deviot.Hermes.Modbus.Api.V1.Controllers
 {
-    [Route("api/v{version:apiVersion}/device-settings")]
-    public class DeviceSettingsController : BaseController
+    [Route("api/v{version:apiVersion}/broker-settings")]
+    public class BrokerSettingsController : BaseController
     {
-        private readonly IDeviceSettingsService _modbusDeviceService;
+        private readonly IBrokerSettingsService _brokerSettingsService;
 
-        public DeviceSettingsController(INotifier notifier, ILogger<DeviceSettingsController> logger, IDeviceSettingsService modbusDeviceService) : base(notifier, logger)
+        public BrokerSettingsController(INotifier notifier, ILogger<DeviceSettingsController> logger, IBrokerSettingsService brokerSettingsService) : base(notifier, logger)
         {
-            _modbusDeviceService = modbusDeviceService;
+            _brokerSettingsService = brokerSettingsService;
         }
 
         [HttpGet]
@@ -24,7 +24,7 @@ namespace Deviot.Hermes.Modbus.Api.V1.Controllers
         {
             try
             {
-                return CustomResponse(await _modbusDeviceService.GetAsync());
+                return CustomResponse(await _brokerSettingsService.GetAsync());
             }
             catch (Exception exception)
             {
@@ -39,7 +39,7 @@ namespace Deviot.Hermes.Modbus.Api.V1.Controllers
         {
             try
             {
-                await _modbusDeviceService.ResetAsync();
+                await _brokerSettingsService.ResetAsync();
                 return CustomResponse();
             }
             catch (Exception exception)
@@ -50,17 +50,17 @@ namespace Deviot.Hermes.Modbus.Api.V1.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> PutAsync([FromBody] ModbusDeviceViewModel deviceModelView)
+        public async Task<ActionResult> PutAsync([FromBody] MosquittoBrokerViewModel brokerViewModel)
         {
             try
             {
-                if (deviceModelView == null)
+                if (brokerViewModel == null)
                     return ReturnActionResultForInvalidInformation();
 
                 if (!ModelState.IsValid)
                     return ReturnActionResultForInvalidModelState(ModelState);
 
-                await _modbusDeviceService.UpdateAsync(deviceModelView);
+                await _brokerSettingsService.UpdateAsync(brokerViewModel);
                 return CustomResponse();
             }
             catch (Exception exception)

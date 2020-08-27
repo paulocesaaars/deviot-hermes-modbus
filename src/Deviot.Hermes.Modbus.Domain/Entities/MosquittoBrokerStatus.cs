@@ -1,6 +1,6 @@
 ﻿namespace Deviot.Hermes.Modbus.Domain.Entities
 {
-    public class ModbusStatusDevice
+    public class MosquittoBrokerStatus
     {
         public string Description { get; private set; }
 
@@ -10,19 +10,16 @@
 
         public int Port { get; private set; }
 
-        public int Scan { get; private set; }
-
         public int Timeout { get; private set; }
 
         public bool Status { get; private set; }
 
-        public ModbusStatusDevice(string description, bool active, string ip, int port, int scan, int timeout, bool status)
+        public MosquittoBrokerStatus(string description, bool active, string ip, int port, int timeout, bool status)
         {
             Description = description;
             Active = active;
             Ip = ip;
             Port = port;
-            Scan = scan;
             Timeout = timeout;
             Status = status;
         }
