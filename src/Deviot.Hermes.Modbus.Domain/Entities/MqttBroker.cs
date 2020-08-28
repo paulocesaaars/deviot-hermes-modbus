@@ -1,6 +1,8 @@
-﻿namespace Deviot.Hermes.Modbus.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace Deviot.Hermes.Modbus.Domain.Entities
 {
-    public class MosquittoBroker
+    public class MqttBroker
     {
         public string Description { get; private set; }
 
@@ -12,18 +14,21 @@
 
         public int Timeout { get; private set; }
 
-        public MosquittoBroker()
+        public IEnumerable<MqttTopic> Topics { get; private set; }
+
+        public MqttBroker()
         {
 
         }
 
-        public MosquittoBroker(string description, bool active, string ip, int port, int timeout)
+        public MqttBroker(string description, bool active, string ip, int port, int timeout)
         {
             Description = description;
             Active = active;
             Ip = ip;
             Port = port;
             Timeout = timeout;
+            Topics = new List<MqttTopic>();
         }
     }
 }

@@ -1,12 +1,10 @@
-﻿using Deviot.Hermes.Common;
-
-namespace Deviot.Hermes.Modbus.Domain.Entities
+﻿namespace Deviot.Hermes.Modbus.Domain.Entities
 {
     public abstract class ModbusInformation
     {
         public string Id { get; protected set; }
 
-        public string Topic { get; protected set; }
+        
 
         public string Description { get; protected set; }
 
@@ -17,8 +15,6 @@ namespace Deviot.Hermes.Modbus.Domain.Entities
         public ushort ModbusInformationTypeId { get; protected set; }
 
         public abstract ModbusInformationType ModbusInformationType { get; }
-
-        public abstract DeviceDataType DataType { get; }
 
         public byte DeviceId { get; protected set; }
 
@@ -44,5 +40,11 @@ namespace Deviot.Hermes.Modbus.Domain.Entities
         public ushort StartAddress { get; protected set; }
 
         public ushort NumberOfAddresses { get; private set; }
+
+        public string Topic { get; protected set; }
+
+        public byte QosLevel { get; protected set; }
+
+        public bool Retain { get; protected set; }
     }
 }

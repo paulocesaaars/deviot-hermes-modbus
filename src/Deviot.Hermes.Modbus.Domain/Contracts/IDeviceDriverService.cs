@@ -1,5 +1,4 @@
-﻿using Deviot.Hermes.Common;
-using Deviot.Hermes.Modbus.Domain.Entities;
+﻿using Deviot.Hermes.Modbus.Domain.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -21,8 +20,10 @@ namespace Deviot.Hermes.Modbus.Domain.Contracts
 
         public void SendData(string idInformation, string data);
 
-        event InformationChangedHandler ChangedDataEvent;        
+        public void SendData(DeviceTransferData data);
+
+        event ReceiveTransferDataFromBrokerHandler ReceiveTransferDataFromBrokerEvent;        
     }
 
-    public delegate void InformationChangedHandler(object sender, DeviceData data);
+    public delegate void ReceiveTransferDataFromBrokerHandler(object sender, BrokerTrasferData data);
 }

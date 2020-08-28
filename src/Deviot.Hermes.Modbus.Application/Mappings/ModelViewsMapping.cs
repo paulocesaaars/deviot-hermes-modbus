@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Deviot.Hermes.Common;
 using Deviot.Hermes.Modbus.Application.ModelViews;
 using Deviot.Hermes.Modbus.Domain.Entities;
 
@@ -28,7 +27,9 @@ namespace Deviot.Hermes.Modbus.Application.Mappings
                 CreateMap<ModbusInformationTextViewModel, ModbusInformationText>().ReverseMap();
                 CreateMap<ModbusInformationUndefinedViewModel, ModbusInformationUndefined>().ReverseMap();
 
-                CreateMap<MosquittoBrokerViewModel, MosquittoBroker>().ReverseMap();
+                CreateMap<MosquittoBrokerViewModel, MqttBroker>().ReverseMap();
+                CreateMap<MosquittoBrokerStatusViewModel, MqttBrokerStatus>().ReverseMap();
+                CreateMap<MqttTopic, MosquittoTopicViewModel>().ReverseMap();
             });
         }
     }

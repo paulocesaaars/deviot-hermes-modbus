@@ -1,5 +1,4 @@
-﻿using Deviot.Hermes.Common;
-using Deviot.Hermes.Modbus.Domain.Entities;
+﻿using Deviot.Hermes.Modbus.Domain.Entities;
 using System.Text.Json.Serialization;
 
 namespace Deviot.Hermes.Modbus.Infra.Data.Jsons
@@ -8,8 +7,6 @@ namespace Deviot.Hermes.Modbus.Infra.Data.Jsons
     public abstract class ModbusInformationJson
     {
         public string Id { get; set; }
-
-        public string Topic { get; set; }
 
         public string Description { get; set; }
 
@@ -20,8 +17,6 @@ namespace Deviot.Hermes.Modbus.Infra.Data.Jsons
         public ushort ModbusInformationTypeId { get; set; }
 
         public abstract ModbusInformationType ModbusInformationType { get; }
-
-        public abstract DeviceDataType DataType { get; }
 
         public byte DeviceId { get; set; }
 
@@ -47,5 +42,11 @@ namespace Deviot.Hermes.Modbus.Infra.Data.Jsons
         public ushort StartAddress { get; set; }
 
         public ushort NumberOfAddresses { get; set; }
+
+        public string Topic { get; set; }
+
+        public byte QosLevel { get; set; }
+
+        public bool Retain { get; set; }
     }
 }

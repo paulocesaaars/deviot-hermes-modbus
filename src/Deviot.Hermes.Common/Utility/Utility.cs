@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace Deviot.Hermes.Common
@@ -88,9 +89,12 @@ namespace Deviot.Hermes.Common
 
         public static Double ConvertDouble(string value, bool returnZeroOnError = false)
         {
+            IFormatProvider provider = CultureInfo.CreateSpecificCulture("en-US");
+
             try
             {
-                return Double.Parse(value.Replace('.', ','));
+                var result = Double.Parse(value, provider);
+                return result;
             }
             catch (Exception)
             {

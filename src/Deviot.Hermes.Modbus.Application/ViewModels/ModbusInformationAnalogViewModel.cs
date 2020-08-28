@@ -1,5 +1,4 @@
-﻿using Deviot.Hermes.Common;
-using Deviot.Hermes.Modbus.Domain.Entities;
+﻿using Deviot.Hermes.Modbus.Domain.Entities;
 
 namespace Deviot.Hermes.Modbus.Application.ModelViews
 {
@@ -20,7 +19,5 @@ namespace Deviot.Hermes.Modbus.Application.ModelViews
         public int DecimalPlaces { get; set; }
 
         public override ModbusInformationType ModbusInformationType => ModbusInformationType.ModbusInformationAnalog;
-
-        public override DeviceDataType DataType => DeviceDataType.Decimal;
     }
 }

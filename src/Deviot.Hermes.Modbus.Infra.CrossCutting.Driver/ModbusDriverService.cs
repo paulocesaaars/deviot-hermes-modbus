@@ -19,11 +19,12 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
     {
         #region Attributes
         private bool _status = false;
+        private bool _statusConnection = false;
         private bool _writing = false;
         private Thread _manageConnection;
         private Dictionary<string, DeviceData> _data;
         private Dictionary<string, int> _numberOfReadingAttempts;
-        private Domain.Entities.ModbusDevice _modbusDevice;
+        private Domain.Entities.ModbusDevice _modbusSettings;
 
         private readonly ILogger<ModbusDriverService> _logger;
         #endregion
@@ -102,11 +103,11 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
             {
                 using (var tcpClient = new TcpClient())
                 {
-                    tcpClient.ReceiveTimeout = _modbusDevice.Timeout;
-                    tcpClient.SendTimeout = _modbusDevice.Timeout;
+                    tcpClient.ReceiveTimeout = _modbusSettings.Timeout;
+                    tcpClient.SendTimeout = _modbusSettings.Timeout;
 
                     var modbusIpMaster = ModbusIpMaster.CreateIp(tcpClient);
-                    tcpClient.Connect(_modbusDevice.Ip, _modbusDevice.Port);
+                    tcpClient.Connect(_modbusSettings.Ip, _modbusSettings.Port);
                     modbusIpMaster.WriteSingleCoil(id, address, value);
 
                     tcpClient.Close();
@@ -120,11 +121,11 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
             {
                 using (var tcpClient = new TcpClient())
                 {
-                    tcpClient.ReceiveTimeout = _modbusDevice.Timeout;
-                    tcpClient.SendTimeout = _modbusDevice.Timeout;
+                    tcpClient.ReceiveTimeout = _modbusSettings.Timeout;
+                    tcpClient.SendTimeout = _modbusSettings.Timeout;
 
                     var modbusIpMaster = ModbusIpMaster.CreateIp(tcpClient);
-                    tcpClient.Connect(_modbusDevice.Ip, _modbusDevice.Port);
+                    tcpClient.Connect(_modbusSettings.Ip, _modbusSettings.Port);
                     modbusIpMaster.WriteSingleRegister(id, address, value);
 
                     tcpClient.Close();
@@ -156,12 +157,12 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
             }
             else if (modbusInformation.ModbusFunctionType.Equals(ModbusFunctionType.HoldingRegister))
             {
-                if (modbusInformation.DataType.Equals(DeviceDataType.Digital))
+                if (modbusInformation.ModbusInformationType.Equals(ModbusInformationType.ModbusInformationDigital))
                 {
                     var value = ConvertObjectForBoolean(data);
                     WriteSingleRegister(modbusInformation.DeviceId, modbusInformation.StartAddress, value ? '1' : '0');
                 }
-                else if (modbusInformation.DataType.Equals(DeviceDataType.Decimal))
+                else if (modbusInformation.ModbusInformationType.Equals(ModbusInformationType.ModbusInformationAnalog))
                 {
                     var modbusInformationDecimal = (ModbusInformationAnalog)modbusInformation;
                     var multiplicador = (modbusInformationDecimal.MaxRawValue - modbusInformationDecimal.MinRawValue) / (modbusInformationDecimal.MaxValue - modbusInformationDecimal.MinValue);
@@ -214,7 +215,7 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
                         }
                     }
                 }
-                else if (modbusInformation.DataType.Equals(DeviceDataType.Text))
+                else if (modbusInformation.ModbusInformationType.Equals(ModbusInformationType.ModbusInformationText))
                 {
                     var registers = GetUShortArray(data.ToString().ToCharArray(), modbusInformation.NumberOfAddresses);
 
@@ -232,20 +233,44 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
             }
         }
 
+        private void SendTransferData(BrokerTrasferData brokerTrasferData)
+        {
+            try
+            {
+                if (ReceiveTransferDataFromBrokerEvent != null)
+                    ReceiveTransferDataFromBrokerEvent(this, brokerTrasferData);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception.Message);
+            }
+        }
+
+        private BrokerTrasferData ConvertDeviceDataForBrokerTransferData(DeviceData data)
+        {
+            var information = _modbusSettings.ModbusInformations.First(i => i.Id == data.IdInformation);
+            return new BrokerTrasferData(data.IdInformation, data.Description, data.Value, data.Quality, information.Topic, information.QosLevel, information.Retain);
+        }
+
         private void SetData(string idInformation, object value)
         {
             _data[idInformation].SetValue(value);
+            SendTransferData(ConvertDeviceDataForBrokerTransferData(_data[idInformation]));
         }
 
         private void SetBadData(string idInformation)
         {
             _data[idInformation].BadValue();
+            SendTransferData(ConvertDeviceDataForBrokerTransferData(_data[idInformation]));
         }
 
         private void SetBadAllData()
         {
             foreach (var data in _data)
+            {
                 data.Value.BadValue();
+                SendTransferData(ConvertDeviceDataForBrokerTransferData(data.Value));
+            }
         }
 
         private void SetDigitalData(ModbusInformation modbusInformation, bool[] registers)
@@ -255,12 +280,12 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
 
         private void SetShortData(ModbusInformation modbusInformation, ushort[] registers)
         {
-            if (modbusInformation.DataType.Equals(DeviceDataType.Digital))
+            if (modbusInformation.ModbusInformationType.Equals(ModbusInformationType.ModbusInformationDigital))
             {
                 var value = ConvertObjectForBoolean(registers[0]);
                 SetData(modbusInformation.Id, value);
             }
-            else if (modbusInformation.DataType.Equals(DeviceDataType.Decimal))
+            else if (modbusInformation.ModbusInformationType.Equals(ModbusInformationType.ModbusInformationAnalog))
             {
                 Double value;
                 var modbusInformationDecimal = (ModbusInformationAnalog)modbusInformation;
@@ -320,13 +345,14 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
                 {
                     using (var tcpClient = new TcpClient())
                     {
-                        tcpClient.ReceiveTimeout = _modbusDevice.Timeout;
-                        tcpClient.SendTimeout = _modbusDevice.Timeout;
+                        tcpClient.ReceiveTimeout = _modbusSettings.Timeout;
+                        tcpClient.SendTimeout = _modbusSettings.Timeout;
 
                         var modbusIpMaster = ModbusIpMaster.CreateIp(tcpClient);
-                        tcpClient.Connect(_modbusDevice.Ip, _modbusDevice.Port);
+                        tcpClient.Connect(_modbusSettings.Ip, _modbusSettings.Port);
+                        _statusConnection = true;
 
-                        foreach (var modbusInformation in _modbusDevice.ModbusInformations)
+                        foreach (var modbusInformation in _modbusSettings.ModbusInformations)
                         {
                             try
                             {
@@ -346,7 +372,7 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
                                 _logger.LogError(exception.Message);
                                 _numberOfReadingAttempts[modbusInformation.Id]++;
 
-                                if (_numberOfReadingAttempts[modbusInformation.Id] >= _modbusDevice.MaximumNumberOfReadingAttempts)
+                                if (_numberOfReadingAttempts[modbusInformation.Id] >= _modbusSettings.MaximumNumberOfReadingAttempts)
                                 {
                                     _numberOfReadingAttempts[modbusInformation.Id] = 0;
                                     SetBadData(modbusInformation.Id);
@@ -361,6 +387,7 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
             catch (Exception exception)
             {
                 _logger.LogError(exception.Message);
+                _statusConnection = false;
                 SetBadAllData();
             }
         }
@@ -381,8 +408,8 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
                 }
 
                 var timeDif = DateTime.Now - startTime;
-                if (timeDif.TotalMilliseconds < _modbusDevice.Scan)
-                    Thread.Sleep(_modbusDevice.Scan - Convert.ToInt32(timeDif.TotalMilliseconds));
+                if (timeDif.TotalMilliseconds < _modbusSettings.Scan)
+                    Thread.Sleep(_modbusSettings.Scan - Convert.ToInt32(timeDif.TotalMilliseconds));
             }
         }
         #endregion
@@ -391,13 +418,13 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
         public ModbusDeviceStatus GetDeviceStatus()
         {
             return new ModbusDeviceStatus
-                ( _modbusDevice.Description
-                , _modbusDevice.Active
-                , _modbusDevice.Ip
-                , _modbusDevice.Port
-                , _modbusDevice.Scan
-                , _modbusDevice.Timeout
-                , _status
+                ( _modbusSettings.Description
+                , _modbusSettings.Active
+                , _modbusSettings.Ip
+                , _modbusSettings.Port
+                , _modbusSettings.Scan
+                , _modbusSettings.Timeout
+                , _statusConnection
                 );
         }
 
@@ -410,10 +437,10 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
 
         public void SendData(string idInformation, string data)
         {
-            if(_modbusDevice.ModbusInformations.Any(d => d.Id == idInformation))
+            if(_modbusSettings.ModbusInformations.Any(d => d.Id == idInformation))
             {
                 _writing = true;
-                var information = _modbusDevice.ModbusInformations.First(d => d.Id == idInformation);
+                var information = _modbusSettings.ModbusInformations.First(d => d.Id == idInformation);
                 try
                 {
                     if (!information.EnableWrite)
@@ -437,6 +464,18 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
             }
         }
 
+        public void SendData(DeviceTransferData data)
+        {
+            try
+            {
+                SendData(data.IdInformation, data.Value);
+            }
+            catch(Exception exception)
+            {
+                _logger.LogError(exception.Message);
+            }
+        }
+
         public void UpdateDevice(Domain.Entities.ModbusDevice modbusDevice)
         {
             _status = false;
@@ -453,7 +492,7 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
             {
                 if (!_data.Any(d => d.Key == information.Id))
                 {
-                    _data.Add(information.Id, new DeviceData(information.Id, information.Description, information.DataType, null, false));
+                    _data.Add(information.Id, new DeviceData(information.Id, information.Description, null, false));
                     _numberOfReadingAttempts.Add(information.Id, 0);
                 }
             }
@@ -461,14 +500,14 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
             if (modbusDevice.Active)
             {
                 _status = true;
-                _modbusDevice = modbusDevice;
+                _modbusSettings = modbusDevice;
                 _manageConnection = new Thread(ManageComunication);
                 _manageConnection.Start();
             }
             else
             {
                 Stop();
-                _modbusDevice = modbusDevice;
+                _modbusSettings = modbusDevice;
             }
         }
 
@@ -478,7 +517,7 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
             {
                 _data.Clear();
                 foreach (var information in modbusDevice.ModbusInformations)
-                    _data.Add(information.Id, new DeviceData(information.Id, information.Description, information.DataType, null, false));
+                    _data.Add(information.Id, new DeviceData(information.Id, information.Description, null, false));
 
                 _numberOfReadingAttempts.Clear();
                 foreach (var modbusInformation in modbusDevice.ModbusInformations)
@@ -487,7 +526,7 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
                 if(modbusDevice.Active)
                 {
                     _status = true;
-                    _modbusDevice = modbusDevice;
+                    _modbusSettings = modbusDevice;
                     _manageConnection = new Thread(ManageComunication);
                     _manageConnection.Start();
                 }
@@ -509,11 +548,9 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
             GC.SuppressFinalize(true);
         }
 
-        private void NotifyDataChange(DeviceData data)
-        {
-            if (ChangedDataEvent != null)
-                ChangedDataEvent(this, data);
-        }
+        
+
+
         #endregion
 
         #region Protected
@@ -522,7 +559,7 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
         #endregion
 
         #region Events
-        public event InformationChangedHandler ChangedDataEvent;
+        public event ReceiveTransferDataFromBrokerHandler ReceiveTransferDataFromBrokerEvent;
         #endregion
     }
 }

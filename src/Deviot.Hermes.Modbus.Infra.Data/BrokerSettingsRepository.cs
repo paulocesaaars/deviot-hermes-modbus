@@ -35,7 +35,7 @@ namespace Deviot.Hermes.Modbus.Infra.Data
 
         #region Methods
         #region Private
-        private async Task<MosquittoBroker> ReadFileAsync()
+        private async Task<MqttBroker> ReadFileAsync()
         {
             try
             {
@@ -45,7 +45,7 @@ namespace Deviot.Hermes.Modbus.Infra.Data
                 using (FileStream stream = File.OpenRead(PATH_JSON))
                 {
                     var broker = await JsonSerializer.DeserializeAsync<MosquittoBrokerJson>(stream);
-                    return _mapper.Map<MosquittoBroker>(broker);
+                    return _mapper.Map<MqttBroker>(broker);
                 }
             }
             catch(Exception)
@@ -54,7 +54,7 @@ namespace Deviot.Hermes.Modbus.Infra.Data
             }
         }
 
-        private async Task WriteFileAsync(MosquittoBroker broker)
+        private async Task WriteFileAsync(MqttBroker broker)
         {
             try
             {
@@ -79,19 +79,19 @@ namespace Deviot.Hermes.Modbus.Infra.Data
         #endregion
 
         #region Public
-        public async Task<MosquittoBroker> GetAsync()
+        public async Task<MqttBroker> GetAsync()
         {
             return await ReadFileAsync();
         }
 
-        public async Task UpdateAsync(MosquittoBroker broker)
+        public async Task UpdateAsync(MqttBroker broker)
         {
             await WriteFileAsync(broker);
         }
 
-        public async Task<MosquittoBroker> ResetAsync()
+        public async Task<MqttBroker> ResetAsync()
         {
-            var broker = new MosquittoBroker("Broker Mosquitto", false, "127.0.0.1", 502, 1000);
+            var broker = new MqttBroker("Broker Mosquitto", false, "127.0.0.1", 1883, 1000);
             await WriteFileAsync(broker);
 
             return broker;

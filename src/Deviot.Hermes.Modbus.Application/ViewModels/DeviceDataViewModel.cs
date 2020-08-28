@@ -12,8 +12,6 @@ namespace Deviot.Hermes.Modbus.Application.ModelViews
 
         public DateTime DateTime { get; set; }
 
-        public DeviceDataType DataType { get; set; }
-
         public object Value { get; set; }
 
         public bool Quality { get; set; }

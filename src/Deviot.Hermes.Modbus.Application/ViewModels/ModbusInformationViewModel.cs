@@ -1,5 +1,4 @@
-﻿using Deviot.Hermes.Common;
-using Deviot.Hermes.Modbus.Domain.Entities;
+﻿using Deviot.Hermes.Modbus.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -11,9 +10,6 @@ namespace Deviot.Hermes.Modbus.Application.ModelViews
         [Required(ErrorMessage = "O id da informação não foi informado.")]
         public string Id { get; set; }
 
-        [Required(ErrorMessage = "O tópico para o broker não foi informado.")]
-        public string Topic { get; set; }
-
         [Required(ErrorMessage = "A descrição da informação não foi informada.")]
         public string Description { get; set; }
 
@@ -24,8 +20,6 @@ namespace Deviot.Hermes.Modbus.Application.ModelViews
         public ushort ModbusInformationTypeId { get; set; }
 
         public abstract ModbusInformationType ModbusInformationType { get; }
-
-        public abstract DeviceDataType DataType { get; }
 
         public byte DeviceId { get; set; }
 
@@ -51,5 +45,12 @@ namespace Deviot.Hermes.Modbus.Application.ModelViews
         public ushort StartAddress { get; set; }
 
         public ushort NumberOfAddresses { get; set; }
+
+        [Required(ErrorMessage = "O tópico para o broker não foi informado.")]
+        public string Topic { get; set; }
+
+        public byte QosLevel { get; set; }
+
+        public bool Retain { get; set; }
     }
 }

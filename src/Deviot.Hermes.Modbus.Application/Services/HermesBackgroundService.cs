@@ -1,5 +1,4 @@
-﻿using Deviot.Hermes.Common;
-using Deviot.Hermes.Modbus.Domain.Contracts;
+﻿using Deviot.Hermes.Modbus.Domain.Contracts;
 using Deviot.Hermes.Modbus.Domain.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -34,7 +33,7 @@ namespace Deviot.Hermes.Modbus.Application.Services
             }
         }
 
-        private async Task<MosquittoBroker> GetBrokerSettings()
+        private async Task<MqttBroker> GetBrokerSettings()
         {
             try
             {
@@ -58,29 +57,43 @@ namespace Deviot.Hermes.Modbus.Application.Services
             _modbusDriverService = modbusDriverService;
             _brokerDriverService = brokerDriverService;
 
-            _modbusDriverService.ChangedDataEvent += ChangedData;
-            _brokerDriverService.ReceivedWriteDataEvent += ReceivedWriteData;
+            _modbusDriverService.ReceiveTransferDataFromBrokerEvent += ReceiveTransferDataFromBroker;
+            _brokerDriverService.ReceiveTransferDataFromDeviceEvent += ReceiveTransferDataFromDevice;
         }
 
-        public void ChangedData(object sender, DeviceData deviceData)
+        public void ReceiveTransferDataFromDevice(object sender, DeviceTransferData deviceTransferData)
         {
-
+            try
+            {
+                _modbusDriverService.SendData(deviceTransferData);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception.Message);
+            }
         }
 
-        public void ReceivedWriteData(object sender, DeviceData deviceData)
+        public void ReceiveTransferDataFromBroker(object sender, BrokerTrasferData brokerTrasferData)
         {
-
+            try
+            {
+                _brokerDriverService.SendData(brokerTrasferData);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception.Message);
+            }
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             try
             {
+                var broker = await GetBrokerSettings();
+                _brokerDriverService.Start(broker);
+
                 var device = await GetDeviceSettings();
                 _modbusDriverService.Start(device);
-
-                var broker = await GetBrokerSettings();
-                _brokerDriverService.Start(broker, device);
             }
             catch (Exception exception)
             {

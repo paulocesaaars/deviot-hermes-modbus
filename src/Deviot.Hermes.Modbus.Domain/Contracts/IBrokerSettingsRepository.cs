@@ -5,10 +5,10 @@ namespace Deviot.Hermes.Modbus.Domain.Contracts
 {
     public interface IBrokerSettingsRepository
     {
-        Task<MosquittoBroker> GetAsync();
+        Task<MqttBroker> GetAsync();
 
-        Task UpdateAsync(MosquittoBroker device);
+        Task UpdateAsync(MqttBroker device);
 
-        Task<MosquittoBroker> ResetAsync();
+        Task<MqttBroker> ResetAsync();
     }
 }

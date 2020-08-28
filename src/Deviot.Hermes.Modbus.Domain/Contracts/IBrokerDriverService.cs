@@ -1,25 +1,22 @@
-﻿using Deviot.Hermes.Common;
-using Deviot.Hermes.Modbus.Domain.Entities;
+﻿using Deviot.Hermes.Modbus.Domain.Entities;
 using System;
 
 namespace Deviot.Hermes.Modbus.Domain.Contracts
 {
     public interface IBrokerDriverService : IDisposable
     {
-        public void Start(MosquittoBroker brokerDevice, ModbusDevice modbusDevice);
+        public void Start(MqttBroker mqttBroker);
 
         public void Stop();
 
-        public void UpdateDevice(MosquittoBroker brokerDevice, ModbusDevice modbusDevice);
+        public void UpdateDevice(MqttBroker mqttBroker);
 
-        public MosquittoBrokerStatus GetBrokerStatus();
+        public MqttBrokerStatus GetBrokerStatus();
 
-        public void SendData(string topic, DeviceData data);
+        public void SendData(BrokerTrasferData data);
 
-        public void SendData(string topic, ModbusDeviceStatus modbusDevice);
-
-        event ReceivedWriteDataHandler ReceivedWriteDataEvent;
+        event ReceiveTransferDataFromDeviceHandler ReceiveTransferDataFromDeviceEvent;
     }
 
-    public delegate void ReceivedWriteDataHandler(object sender, DeviceData data);
+    public delegate void ReceiveTransferDataFromDeviceHandler(object sender, DeviceTransferData data);
 }
