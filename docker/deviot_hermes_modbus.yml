@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+
+    deviot-hermes-modbus:
+        image: deviot/hermes-modbus:latest
+        container_name: deviot-hermes-modbus
+        build:
+            context: ../src
+            dockerfile: ./Deviot.Hermes.Modbus.Service.Api/Dockerfile
+        ports:
+            - "5000:5000"
+            - "5001:5001"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://*:5000
