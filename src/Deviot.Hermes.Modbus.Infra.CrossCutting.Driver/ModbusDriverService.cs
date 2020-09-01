@@ -411,6 +411,8 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
                 if (timeDif.TotalMilliseconds < _modbusSettings.Scan)
                     Thread.Sleep(_modbusSettings.Scan - Convert.ToInt32(timeDif.TotalMilliseconds));
             }
+
+            _statusConnection = false;
         }
         #endregion
 
@@ -448,18 +450,23 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
 
                     if(ValidateData(information, data))
                         SendModbusData(information, data);
+
+                    _writing = false;
                 }
                 catch(InvalidOperationException exception)
                 {
+                    _writing = false;
                     throw new InvalidOperationException($"Não foi possível escrever, dados inválidos.", exception);
                 }
                 catch(Exception)
                 {
+                    _writing = false;
                     throw new InvalidOperationException($"Não foi possível escrever, dados inválidos.");
                 }
             }
             else
             {
+                _writing = false;
                 throw new InvalidOperationException($"Não foi possível escrever, o id {idInformation} é inválido.");
             }
         }
@@ -479,6 +486,7 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
         public void UpdateDevice(Domain.Entities.ModbusDevice modbusDevice)
         {
             _status = false;
+            _modbusSettings = modbusDevice;
             foreach (var data in _data)
             {
                 if (!modbusDevice.ModbusInformations.Any(m => m.Id == data.Key))
@@ -500,7 +508,6 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
             if (modbusDevice.Active)
             {
                 _status = true;
-                _modbusSettings = modbusDevice;
                 _manageConnection = new Thread(ManageComunication);
                 _manageConnection.Start();
             }
@@ -513,7 +520,8 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
 
         public void Start(Domain.Entities.ModbusDevice modbusDevice)
         {
-            if(!_status)
+            _modbusSettings = modbusDevice;
+            if (!_status)
             {
                 _data.Clear();
                 foreach (var information in modbusDevice.ModbusInformations)
@@ -526,7 +534,6 @@ namespace Deviot.Hermes.Modbus.Infra.CrossCutting.Driver
                 if(modbusDevice.Active)
                 {
                     _status = true;
-                    _modbusSettings = modbusDevice;
                     _manageConnection = new Thread(ManageComunication);
                     _manageConnection.Start();
                 }

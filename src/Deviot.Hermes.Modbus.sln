@@ -41,9 +41,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Infra.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6 - Test", "6 - Test", "{5950B7FD-1DDA-4F1D-95A3-99840A9FDD94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deviot.Hermes.Modbus.Test", "Deviot.Hermes.Modbus.Test\Deviot.Hermes.Modbus.Test.csproj", "{1FCD7995-6B21-432C-9ED6-FEE64620C818}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Modbus.Test", "Deviot.Hermes.Modbus.Test\Deviot.Hermes.Modbus.Test.csproj", "{1FCD7995-6B21-432C-9ED6-FEE64620C818}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deviot.Hermes.Mosquitto.Infra.CrossCutting.Driver", "Deviot.Hermes.Mosquitto.Infra.CrossCutting.Driver\Deviot.Hermes.Mosquitto.Infra.CrossCutting.Driver.csproj", "{12B8A892-F9BD-4BE9-8961-2C6B0AFBBD20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Hermes.Mosquitto.Infra.CrossCutting.Driver", "Deviot.Hermes.Mosquitto.Infra.CrossCutting.Driver\Deviot.Hermes.Mosquitto.Infra.CrossCutting.Driver.csproj", "{12B8A892-F9BD-4BE9-8961-2C6B0AFBBD20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
