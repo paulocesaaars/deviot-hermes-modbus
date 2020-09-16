@@ -1,3 +1,5 @@
+// APLICAÇÃO HERMER
+
 // Build sem tag - executar na raiz do projeto, arquivo Docker file precisa estar acima dos projetos
 
 docker build -t hermes-modbus .
@@ -8,10 +10,16 @@ docker container run -d --name hermes-modbus -p 5000:80 hermes-modbus
 
 docker build -t hermes-modbus:latest .
 
-docker container run -d --name hermes-modbus -p 5000:80  hermes-modbus:latest
+docker container run -d --name hermes-modbus -p 5000:80 hermes-modbus
 
 // Build com arquivo compose - Executar na pasta onde está localizado o arquivo compose
 
-docker-compose -f deviot_hermes_modbus.yml up
+docker-compose docker_compose_deviot_hermes_modbus.yml up
 
-docker-compose -f keeptrue_rulesengine.yml up --build
+docker-compose docker_compose_deviot_hermes_modbus.yml up --build
+
+// MOSQUITTO
+
+docker-compose docker_compose_mosquitto.yml up
+
+docker-compose -f docker_compose_mosquitto.yml up -d
